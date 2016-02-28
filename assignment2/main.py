@@ -1,4 +1,4 @@
-from numpy import matrix, transpose
+from numpy import matrix, transpose, zeros, ones
 from numpy.ma import multiply
 from sklearn.preprocessing import normalize
 
@@ -18,12 +18,14 @@ def forward(belief_state, new_evidence):
 def forward_backward(evidence_sequence, prior, f):
     t = len(evidence_sequence)
     forward_messages = []  # forward messages
-    backward_messages = []  #
-    smoothed_estimates = []  #
+    backward_messages = ones(t)  #
+    smoothed_estimates = zeros(t)  #
 
     forward_messages.append(prior)
     for i in range(1, t):
         forward_messages.append(f.forward(forward_messages[i - 1], evidence_sequence[i]))
 
+    for j in range(t, 1):
+        #  smoothed_estimates[i] =
 
 print(forward([[0.5], [0.5]], 0))
